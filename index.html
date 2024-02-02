@@ -18,22 +18,10 @@
   <script>
     require([
       "esri/Map",
-      "esri/layers/GeocodingwithAGOL",
+      "esri/layers/GeoJSONLayer",
       "esri/views/MapView"
-    ], function(Map, GeocodingwithAGOL, MapView) {
+    ], function(Map, GeoJSONLayer, MapView) {
       const url = "https://arcg.is/0T5WmL";
-      const template = {
-        title: "Earthquake Info",
-        content: "Magnitude {mag} {type} hit {place} on {time}",
-        fieldInfos: [
-          {
-            fieldName: 'time',
-            format: {
-              dateFormat: 'short-date-short-time'
-            }
-          }
-        ]
-      };
 
       const renderer = {
         type: "simple",
@@ -54,19 +42,6 @@
           ]
         }]
       };
-
-      const geojsonLayer = new GeoJSONLayer({
-        url: url,
-        copyright: "USGS Earthquakes",
-        popupTemplate: template,
-        renderer: renderer,
-        orderBy: { field: "mag" }
-      });
-
-      const map = new Map({
-        basemap: "gray-vector",
-        layers: [geojsonLayer]
-      });
 
       const view = new MapView({
         container: "viewDiv",
