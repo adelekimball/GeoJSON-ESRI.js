@@ -1,50 +1,27 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
-
-    <style>
-      html,
-      body,
-      #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-
-    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
-    <script src="https://js.arcgis.com/4.28/"></script>
-    <script>
-        require(["esri/config", "esri/Map", "esri/layers/GeoJSONLayer", "esri/views/MapView"], function(esriConfig, Map, MapView) {
-            esriConfig.apiKey = "AAPK93c8121c16b24fcfb8615f6a648285depsp_n5EQrTHWocGTuMcvTeDuUlh73TY5B16e-HSnKUuuCX09Vv4mQ_hI_zx8fwt9";
-            
-<html lang="en">
-
-
-  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.28/"></script>
-
+</head>
+<body>
+  <div id="viewDiv"></div>
   <script>
-    require(["esri/Map", "esri/layers/GeoJSONLayer", "esri/views/MapView"], (
-      Map,
-      GeoJSONLayer,
-      MapView
-    ) => {
-      // If GeoJSON files are not on the same domain as your website, a CORS enabled server
-      // or a proxy is required.
+    require([
+      "esri/Map",
+      "esri/layers/GeoJSONLayer",
+      "esri/views/MapView"
+    ], function(Map, GeoJSONLayer, MapView) {
       const url = "https://arcg.is/0T5WmL";
-
-      // Paste the url into a browser's address bar to download and view the attributes
-      // in the GeoJSON file. These attributes include:
-      // * mag - magnitude
-      // * type - earthquake or other event such as nuclear test
-      // * place - location of the event
-      // * time - the time of the event
-      // Use the Arcade Date() function to format time field into a human-readable format
-
       const template = {
         title: "Earthquake Info",
         content: "Magnitude {mag} {type} hit {place} on {time}",
@@ -71,14 +48,9 @@
         visualVariables: [{
           type: "size",
           field: "mag",
-          stops: [{
-              value: 2.5,
-              size: "4px"
-            },
-            {
-              value: 8,
-              size: "40px"
-            }
+          stops: [
+            { value: 2.5, size: "4px" },
+            { value: 8, size: "40px" }
           ]
         }]
       };
@@ -88,9 +60,7 @@
         copyright: "USGS Earthquakes",
         popupTemplate: template,
         renderer: renderer,
-        orderBy: {
-          field: "mag"
-        }
+        orderBy: { field: "mag" }
       });
 
       const map = new Map({
@@ -105,11 +75,6 @@
         map: map
       });
     });
-
   </script>
-
-  </head>
-  <body>
-    <div id="viewDiv"></div>
-  </body>
+</body>
 </html>
