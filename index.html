@@ -19,39 +19,30 @@
   <script>
     require([
       "esri/Map",
-      "esri/layers/GeoJSONLayer",
+      "esri/layers/FeatureLayer",
       "esri/views/MapView"
-    ], function(Map, GeoJSONLayer, MapView) {
-      const url = "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MegaCitiesKimball/FeatureServer";
+    ], function(Map, FeatureLayer, MapView) {
+      const url = "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MegaCitiesKimball/FeatureServer/0";
 
       const renderer = {
         type: "simple",
-        field: "mag",
         symbol: {
           type: "simple-marker",
           color: "orange",
           outline: {
             color: "white"
           }
-        },
-        visualVariables: [{
-          type: "size",
-          field: "mag",
-          stops: [
-            { value: 2.5, size: "4px" },
-            { value: 8, size: "40px" }
-          ]
-        }]
+        }
       };
 
-      const geojsonLayer = new GeoJSONLayer({
+      const featureLayer = new FeatureLayer({
         url: url,
         renderer: renderer
       });
 
       const map = new Map({
         basemap: "gray-vector",
-        layers: [geojsonLayer]
+        layers: [featureLayer]
       });
 
       const view = new MapView({
